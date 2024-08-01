@@ -1,0 +1,40 @@
+<%-include("partials/Header.ejs") %>
+<div class="outerShell">
+    <div class="displayWeather TodayWeather">
+        <h1 class="myLocation Today">My location</h1>
+        <h3 class="location Today"><%= location %></h3>
+        <h1 class="CurrentTemp Today"><%= Math.floor((weather[0].temp-32)*5/9+1) %>°</p>
+        <div class="MaxMinTemp">
+            <h3 class="MaxTempT Today">Max: <%= Math.floor((weather[0].tempmax-32)*5/9+1) %>°</h3>
+            <h3 class="MinTempT Today">Min: <%= Math.floor((weather[0].tempmin-32)*5/9+1) %>°</h3>
+        </div>
+        <h2 class="weatherIcon Today"><%=weather[0].icon  %></h2>
+    </div>
+    <div class="displayWeather">
+        <% if(locals.weather){ %>
+            <%for(i=0;i<7;i++){%>
+                <div class="weatherForecast">
+                    <p class="weatherData"><%= weather[i].datetime %></p>
+                    <% if(weather[i].icon == "clear-day"){ %>
+                        <p class="weatherData">🌤️</p>
+                    <% }else if(weather[i].icon == "rain"){ %>
+                        <p class="weatherData">🌧️</p>
+                    <% }else if(weather[i].icon == "partly-cloudy-day"){ %>
+                        <p class="weatherData">⛅</p>
+                    <% }else if(weather[i].icon == "cloudy"){ %>
+                        <p class="weatherData">☁️</p>
+                    <% }else{ %>
+                        <p class="weatherData">🌪</p>
+                    <% } %>
+                    <p class="weatherData mintemp">Min: <%= Math.floor((weather[i].tempmin-32)*5/9+1) %>°C</p>
+                    <p class="weatherData"><%= Math.floor((weather[i].temp-32)*5/9+1) %>°C</p>
+                    <p class="weatherData">Max: <%= Math.floor((weather[i].tempmax-32)*5/9+1) %>°C</p>
+                </div>
+            <% } %>
+        <% } %>
+        <% if(locals.error){ %>
+            <p class="weatherData"><%= error %></p>
+        <% } %>
+    </div>
+</div>
+<%-include("partials/footer.ejs") %>

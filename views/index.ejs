@@ -1,0 +1,15 @@
+<%-include("partials/Header.ejs") %>
+<div class="SearchPart">
+    <div class="SearchContent">
+        <h1 class="SearchTitle">Search City or a location's weather</h1>
+        <form action="/post" method="post" class="search-bar">
+            <input type="search" name="search" pattern=".*\S.*" required>
+            <button class="search-btn" type="submit">
+                <span>Search</span>
+            </button>
+        </form>
+    </div>
+</div>
+
+
+<%-include("partials/footer.ejs") %>
